@@ -24,8 +24,9 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[datadog-cookbook::default]
+      - recipe[datadog::default]
     verifier:
       inspec_tests:
         - test/integration/default
     attributes:
+      datadog:

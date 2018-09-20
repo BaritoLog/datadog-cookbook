@@ -3,10 +3,11 @@
 # Recipe:: default
 #
 # Copyright:: 2018, BaritoLog, All Rights Reserved.
+
 api_key = node[cookbook_name]['datadog_api_key']
+hostname = node[cookbook_name]['datadog_hostname']
 user = node[cookbook_name]['user']
 group = node[cookbook_name]['group']
-hostname = node[cookbook_name]['datadog_hostname']
 datadog_config_path = node[cookbook_name]['datadog_config_path']
 
 execute 'Install Datadog agent' do
@@ -23,9 +24,7 @@ template "#{datadog_config_path}/datadog.yaml" do
   variables api_key: api_key, hostname: hostname
 end
 
-execute 'Start Datadog agent' do
-  command 'sudo systemctl restart datadog-agent.service'
-  user 'root'
-  group 'root'
+service 'datadog-agent' do
+  supports start: true, enable: true, restart: true
+  action [ :enable, :start ]
 end
-
