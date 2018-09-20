@@ -19,14 +19,29 @@ platforms:
     provisioner:
       product_name: chef
       product_version: latest
-  - name: centos-7
 
 suites:
   - name: default
     run_list:
       - recipe[datadog::default]
+      - recipe[datadog::process_datadog]
+      - recipe[datadog::postgres_datadog]
     verifier:
       inspec_tests:
         - test/integration/default
     attributes:
       datadog:
+        datadog_api_key: 'abc'
+        process:
+          instances:
+            - name: 'process'
+              search_string: 'process'
+              tags:
+                - tag-1
+        postgres:
+          instances:
+            - username: 'admin'
+              password: 'admin'
+              db_name: 'default'
+              tags:
+                - tag-1
