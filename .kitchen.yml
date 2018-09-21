@@ -49,3 +49,6 @@ suites:
         zfs_available_check:
           instances:
             - storage_pool: 'storage_pool'
+        zfs_used_check:
+          instances:
+            - storage_pool: 'storage_pool'
