@@ -15,6 +15,18 @@ unless os.windows?
   end
 end
 
+describe file('/etc/datadog-agent/conf.d/zfs_available_check.yaml') do
+  its('mode') { should cmp '0644' }
+  its('owner') { should eq 'root' }
+  its('group') { should eq 'root' }
+end
+
+describe file('/etc/datadog-agent/checks.d/zfs_available_check.py') do
+  its('mode') { should cmp '0644' }
+  its('owner') { should eq 'root' }
+  its('group') { should eq 'root' }
+end
+
 describe service('datadog-agent') do
   it { should be_installed }
   it { should be_enabled }
