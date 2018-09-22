@@ -46,9 +46,9 @@ suites:
               db_name: 'default'
               tags:
                 - tag-1
-        zfs_free_check:
+        zfs_free:
           instances:
             - storage_pool: 'storage_pool'
-        zfs_used_check:
+        zfs_used:
           instances:
             - storage_pool: 'storage_pool'
