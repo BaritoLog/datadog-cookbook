@@ -26,6 +26,7 @@ suites:
       - recipe[datadog::default]
       - recipe[datadog::process_datadog]
       - recipe[datadog::postgres_datadog]
+      - recipe[datadog::zfs_check]
     verifier:
       inspec_tests:
         - test/integration/default
@@ -45,3 +46,9 @@ suites:
               db_name: 'default'
               tags:
                 - tag-1
+        zfs_free_check:
+          instances:
+            - storage_pool: 'storage_pool'
+        zfs_used_check:
+          instances:
+            - storage_pool: 'storage_pool'
