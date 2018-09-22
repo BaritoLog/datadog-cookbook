@@ -6,7 +6,7 @@
 #
 #
 
-file "/etc/datadog-agent/checks.d/zfs_free_check.py" do
+cookbook_file "/etc/datadog-agent/checks.d/zfs_free_check.py" do
   source "datadog.zfs_free_check.py"
   owner node[cookbook_name]['user']
   group node[cookbook_name]['group']
@@ -23,7 +23,7 @@ template "/etc/datadog-agent/conf.d/zfs_free_check.yaml" do
   notifies :restart, 'service[datadog-agent]', :delayed
 end
 
-file "/etc/datadog-agent/checks.d/zfs_used_check.py" do
+cookbook_file "/etc/datadog-agent/checks.d/zfs_used_check.py" do
   source "datadog.zfs_used_check.py"
   owner node[cookbook_name]['user']
   group node[cookbook_name]['group']
