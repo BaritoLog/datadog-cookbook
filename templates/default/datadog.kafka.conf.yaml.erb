@@ -3,7 +3,7 @@ instances:
   - host: <%= instance['host'] %>
     port: <%= instance['port'] %>
     tags:
-      - kafka: <%= instance['cluster_name'] %>
+      - kafka:<%= instance['cluster_name'] %>
       <% instance['tags'].each do |tag| %>
       - <%= tag %>
       <% end %>

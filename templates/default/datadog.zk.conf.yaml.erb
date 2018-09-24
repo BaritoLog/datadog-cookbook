@@ -5,7 +5,7 @@ instances:
   - host: <%= instance['host'] %>
     port: <%= instance['port'] %>
     tags:
-      - cluster: <%= instance['cluster_name'] %>
+      - cluster:<%= instance['cluster_name'] %>
       <% instance['tags'].each do |tag| %>
       - <%= tag %>
       <% end %>
