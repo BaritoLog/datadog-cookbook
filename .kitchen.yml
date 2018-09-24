@@ -27,6 +27,9 @@ suites:
       - recipe[datadog::process_datadog]
       - recipe[datadog::postgres_datadog]
       - recipe[datadog::zfs_check]
+      - recipe[datadog::elastic_datadog]
+      - recipe[datadog::zk_datadog]
+      - recipe[datadog::kafka_datadog]
     verifier:
       inspec_tests:
         - test/integration/default
@@ -52,3 +55,22 @@ suites:
         zfs_used:
           instances:
             - storage_pool: 'storage_pool'
+        elastic:
+          instances:
+            - url: 'http://localhost:9200'
+              tags:
+                - tag-1
+        zk:
+          instances:
+            - host: 'localhost'
+              port: 2181
+              cluster_name: 'test'
+              tags:
+                - tag-1
+        kafka:
+          instances:
+            - host: 'localhost'
+              port: 8090
+              cluster_name: 'test'
+              tags:
+                - tag-1
