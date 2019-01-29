@@ -1,7 +1,8 @@
 init_config:
+
 instances:
   <% @instances.each do |instance| %>
-  - burrow_uri: <%= instance['host'] %>:<%= instance['port'] %>
+  - burrow_uri: <%= instance['uri'] %>
     clusters:
       <% instance['cluster_names'].each do |cluster_name| %>
       - <%= cluster_name %>

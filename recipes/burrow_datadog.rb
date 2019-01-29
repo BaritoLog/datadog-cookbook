@@ -12,6 +12,7 @@ template '/etc/datadog-agent/conf.d/burrow.yaml' do
   group node[cookbook_name]['group']
   mode '0644'
   variables(instances: node[cookbook_name]['burrow']['instances'])
+  notifies :restart, 'service[datadog-agent]', :delayed
   only_if 'dpkg -l | grep datadog'
 end
 
