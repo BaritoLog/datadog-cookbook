@@ -15,6 +15,18 @@ unless os.windows?
   end
 end
 
+describe file('/etc/datadog-agent/conf.d/burrow.yaml') do
+  its('mode') { should cmp '0644' }
+  its('owner') { should eq 'root' }
+  its('group') { should eq 'root' }
+end
+
+describe file('/etc/datadog-agent/checks.d/burrow.py') do
+  its('mode') { should cmp '0644' }
+  its('owner') { should eq 'root' }
+  its('group') { should eq 'root' }
+end
+
 describe file('/etc/datadog-agent/conf.d/elastic.d/conf.yaml') do
   its('mode') { should cmp '0644' }
   its('owner') { should eq 'root' }

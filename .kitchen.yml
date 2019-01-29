@@ -30,6 +30,7 @@ suites:
       - recipe[datadog::elastic_datadog]
       - recipe[datadog::zk_datadog]
       - recipe[datadog::kafka_datadog]
+      - recipe[datadog::burrow_datadog]
     verifier:
       inspec_tests:
         - test/integration/default
@@ -72,5 +73,12 @@ suites:
             - host: 'localhost'
               port: 8090
               cluster_name: 'test'
+              tags:
+                - tag-1
+        burrow:
+          instances:
+            - uri: 'http://localhost:8000'
+              cluster_names: 
+                - 'test'
               tags:
                 - tag-1
