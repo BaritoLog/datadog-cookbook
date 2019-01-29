@@ -15,8 +15,8 @@ template '/etc/datadog-agent/conf.d/burrow.yaml' do
   only_if 'dpkg -l | grep datadog'
 end
 
-template '/etc/datadog-agent/checks.d/burrow.py' do
-  source 'datadog.burrow.py.erb'
+cookbook_file '/etc/datadog-agent/checks.d/burrow.py' do
+  source 'datadog.burrow.py'
   owner node[cookbook_name]['user']
   group node[cookbook_name]['group']
   mode '0644'
