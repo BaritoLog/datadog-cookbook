@@ -9,11 +9,28 @@ hostname = node[cookbook_name]['datadog_hostname']
 user = node[cookbook_name]['user']
 group = node[cookbook_name]['group']
 datadog_config_path = node[cookbook_name]['datadog_config_path']
+datadog_agent_version = node[cookbook_name]['datadog_agent_version']
 
-execute 'Install Datadog agent' do
-  command "DD_API_KEY=#{api_key} DD_INSTALL_ONLY=true bash -c \"$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)\""
-  user user
-  group group
+apt_repository 'datadog' do
+  uri 'https://apt.datadoghq.com/'
+  components ['6']
+  distribution 'stable'
+  key 'A2923DFF56EDA6E76E55E492D3A80E30382E94DE'
+  keyserver 'keyserver.ubuntu.com'
+  action :add
+  deb_src true
+end
+
+apt_update 'update'
+
+apt_package 'apt-transport-https' do 
+  action :install 
+end 
+
+apt_package 'datadog-agent' do
+  options "--force-yes"
+  version "1:#{datadog_agent_version}-1"
+  action :install
 end
 
 template "#{datadog_config_path}/datadog.yaml" do
