@@ -10,6 +10,7 @@ user = node[cookbook_name]['user']
 group = node[cookbook_name]['group']
 datadog_config_path = node[cookbook_name]['datadog_config_path']
 datadog_agent_version = node[cookbook_name]['datadog_agent_version']
+dogstatsd_port = node[cookbook_name]['datadog_dogstatsd_port']
 
 apt_repository 'datadog' do
   uri 'https://apt.datadoghq.com/'
@@ -38,7 +39,7 @@ template "#{datadog_config_path}/datadog.yaml" do
   owner 'dd-agent'
   group 'dd-agent'
   mode '0640'
-  variables api_key: api_key, hostname: hostname
+  variables api_key: api_key, hostname: hostname, dogstatsd_port: dogstatsd_port
 end
 
 service 'datadog-agent' do
